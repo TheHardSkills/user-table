@@ -1,0 +1,25 @@
+{
+  "name": "user-table",
+  "version": "1.0.0",
+  "description": "work with users table",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheHardSkills/user-table.git"
+  },
+  "author": "Yuliia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheHardSkills/user-table/issues"
+  },
+  "homepage": "https://github.com/TheHardSkills/user-table#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.4"
+  }
+}
