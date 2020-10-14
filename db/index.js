@@ -54,4 +54,17 @@ usersdb.create = (body) => {
   });
 };
 
+//DELETE FROM users WHERE name=?
+usersdb.delete = (id) => {
+  console.log("id", id);
+  return new Promise((resolve, reject) => {
+    pool.query("DELETE FROM usersdb WHERE id=?", [id], (err, res) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(res);
+    });
+  });
+};
+
 module.exports = usersdb;

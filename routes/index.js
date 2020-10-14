@@ -30,7 +30,19 @@ router.post("/create", jsonParser, async (req, res) => {
 
   try {
     db.create(req.body);
-    res.send("Hello");
+    res.send("Create");
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
+router.get("/delete/:id", jsonParser, async (req, res) => {
+  console.log("req.params.id", req.params.id); //first_name
+
+  try {
+    db.delete(req.params.id);
+    res.send("Delete");
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
