@@ -37,6 +37,19 @@ router.post("/create", jsonParser, async (req, res) => {
   }
 });
 
+//update = (car, id)
+// router.get("/update/:id/", jsonParser, async (req, res) => {
+//   console.log("req.params.id", req.params.id);
+
+//   try {
+//     db.delete(req.params.id);
+//     res.send("Delete");
+//   } catch (e) {
+//     console.log(e);
+//     res.sendStatus(500);
+//   }
+// });
+
 router.get("/delete/:id", jsonParser, async (req, res) => {
   console.log("req.params.id", req.params.id); //first_name
 

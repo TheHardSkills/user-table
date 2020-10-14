@@ -17,14 +17,6 @@ usersdb.all = () => {
       }
       return resolve(results);
     });
-
-    // pool.query(
-    //   "INSERT INTO usersdb(id, first_name, last_name, email, gender, ip_address, car, company)VALUES(1, 'Base', 'Pharaoh', 'bpharaoh0@gmail.com', 'Male', '102.115.48.141', 'Chevrolet', 'Snaptags')",
-    //   (err, res) => {
-    //     console.log(err, res);
-    //     pool.end();
-    //   }
-    // );
   });
 };
 
@@ -54,7 +46,18 @@ usersdb.create = (body) => {
   });
 };
 
-//DELETE FROM users WHERE name=?
+// usersdb.update = (car, id) => {
+//   console.log("id", car, id);
+//   return new Promise((resolve, reject) => {
+//     pool.query("UPDATE users SET car=? WHERE id=?", [car, id], (err, res) => {
+//       if (err) {
+//         return reject(err);
+//       }
+//       return resolve(res);
+//     });
+//   });
+// };
+
 usersdb.delete = (id) => {
   console.log("id", id);
   return new Promise((resolve, reject) => {
