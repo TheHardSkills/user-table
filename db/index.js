@@ -17,6 +17,14 @@ usersdb.all = () => {
       }
       return resolve(results);
     });
+
+    // pool.query(
+    //   "INSERT INTO usersdb(first_name, last_name, email, gender, ip_address, car, company)VALUES('Base', 'Pharaoh', 'bpharaoh0@gmail.com', 'Male', '102.115.48.141', 'Chevrolet', 'Snaptags')",
+    //   (err, res) => {
+    //     console.log(err, res);
+    //     pool.end();
+    //   }
+    // );
   });
 };
 
