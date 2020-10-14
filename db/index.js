@@ -39,4 +39,19 @@ usersdb.one = (id) => {
   });
 };
 
+usersdb.create = (body) => {
+  console.log("body", body);
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `INSERT usersdb(id, first_name, last_name, email, gender, ip_address, car, company)VALUES(${body.id}, '${body.first_name}', '${body.last_name}', '${body.email}', '${body.gender}', '${body.ip_address}', '${body.car}', '${body.company}')`,
+      (err, res) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(res);
+      }
+    );
+  });
+};
+
 module.exports = usersdb;
