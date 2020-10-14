@@ -19,12 +19,23 @@ usersdb.all = () => {
     });
 
     // pool.query(
-    //   "INSERT INTO usersdb(first_name, last_name, email, gender, ip_address, car, company)VALUES('Base', 'Pharaoh', 'bpharaoh0@gmail.com', 'Male', '102.115.48.141', 'Chevrolet', 'Snaptags')",
+    //   "INSERT INTO usersdb(id, first_name, last_name, email, gender, ip_address, car, company)VALUES(1, 'Base', 'Pharaoh', 'bpharaoh0@gmail.com', 'Male', '102.115.48.141', 'Chevrolet', 'Snaptags')",
     //   (err, res) => {
     //     console.log(err, res);
     //     pool.end();
     //   }
     // );
+  });
+};
+
+usersdb.one = (id) => {
+  return new Promise((resolve, reject) => {
+    pool.query("SELECT * FROM usersdb where id = ?", [id], (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results[0]);
+    });
   });
 };
 
