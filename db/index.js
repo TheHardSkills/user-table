@@ -45,19 +45,34 @@ usersdb.one = (id) => {
     });
 };
 
-usersdb.create = (body) => {
-  console.log("body", body);
-  return new Promise((resolve, reject) => {
-    pool.query(
-      `INSERT usersdb(id, first_name, last_name, email, gender, ip_address, car, company)VALUES(${body.id}, '${body.first_name}', '${body.last_name}', '${body.email}', '${body.gender}', '${body.ip_address}', '${body.car}', '${body.company}')`,
-      (err, res) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(res);
-      }
-    );
-  });
+usersdb.create = ({
+  id,
+  first_name,
+  last_name,
+  email,
+  gender,
+  ip_address,
+  car,
+  company,
+}) => {
+  return knex
+    .insert({
+      id,
+      first_name,
+      last_name,
+      email,
+      gender,
+      ip_address,
+      car,
+      company,
+    })
+    .into("usersdb")
+    .then((rows) => {
+      return rows;
+    })
+    .catch((err) => {
+      return err;
+    });
 };
 
 // usersdb.update = (car, id) => {
@@ -74,15 +89,6 @@ usersdb.create = (body) => {
 
 usersdb.delete = (id) => {
   console.log("id", id);
-  // return new Promise((resolve, reject) => {
-  //   pool.query("DELETE FROM usersdb WHERE id=?", [id], (err, res) => {
-  //     if (err) {
-  //       return reject(err);
-  //     }
-  //     return resolve(res);
-  //   });
-  // });
-
   return knex
     .from("usersdb")
     .delete()
