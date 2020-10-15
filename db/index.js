@@ -74,14 +74,25 @@ usersdb.create = (body) => {
 
 usersdb.delete = (id) => {
   console.log("id", id);
-  return new Promise((resolve, reject) => {
-    pool.query("DELETE FROM usersdb WHERE id=?", [id], (err, res) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(res);
+  // return new Promise((resolve, reject) => {
+  //   pool.query("DELETE FROM usersdb WHERE id=?", [id], (err, res) => {
+  //     if (err) {
+  //       return reject(err);
+  //     }
+  //     return resolve(res);
+  //   });
+  // });
+
+  return knex
+    .from("usersdb")
+    .delete()
+    .where("id", "=", `${id}`)
+    .then((rows) => {
+      return rows;
+    })
+    .catch((err) => {
+      return err;
     });
-  });
 };
 
 module.exports = usersdb;
