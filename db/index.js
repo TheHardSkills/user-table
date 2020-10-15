@@ -1,5 +1,16 @@
 const mysql = require("mysql2");
 
+const options = {
+  client: "mysql2",
+  connection: {
+    host: "localhost",
+    user: "yulia",
+    password: "1",
+    database: "test",
+  },
+};
+const knex = require("knex")(options);
+
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: "localhost",
@@ -10,14 +21,18 @@ const pool = mysql.createPool({
 
 let usersdb = {};
 usersdb.all = () => {
-  return new Promise((resolve, reject) => {
-    pool.query("SELECT * FROM usersdb", (err, results) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(results);
+  return knex
+    .from("usersdb")
+    .select("*")
+    .then((rows) => {
+      return rows;
+    })
+    .catch((err) => {
+      return err;
+    })
+    .finally(() => {
+      knex.destroy();
     });
-  });
 };
 
 usersdb.one = (id) => {
