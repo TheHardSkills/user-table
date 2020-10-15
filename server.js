@@ -1,10 +1,10 @@
 const express = require("express");
-const apiRouter = require("./routes");
 const bodyParser = require("body-parser");
+const rootRouter = require("./routes");
 
 const app = express();
 
-app.use("/api/users", apiRouter);
+app.use("/api", rootRouter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
