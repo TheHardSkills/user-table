@@ -29,21 +29,20 @@ usersdb.all = () => {
     })
     .catch((err) => {
       return err;
-    })
-    .finally(() => {
-      knex.destroy();
     });
 };
 
 usersdb.one = (id) => {
-  return new Promise((resolve, reject) => {
-    pool.query("SELECT * FROM usersdb where id = ?", [id], (err, results) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(results[0]);
+  return knex
+    .from("usersdb")
+    .select("*")
+    .where("id", "=", `${id}`)
+    .then((rows) => {
+      return rows;
+    })
+    .catch((err) => {
+      return err;
     });
-  });
 };
 
 usersdb.create = (body) => {
