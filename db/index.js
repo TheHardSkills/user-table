@@ -1,5 +1,3 @@
-const mysql = require("mysql2");
-
 const options = {
   client: "mysql2",
   connection: {
@@ -10,14 +8,6 @@ const options = {
   },
 };
 const knex = require("knex")(options);
-
-const pool = mysql.createPool({
-  connectionLimit: 10,
-  host: "localhost",
-  user: "yulia",
-  password: "1",
-  database: "test",
-});
 
 let usersdb = {};
 usersdb.all = () => {
@@ -74,18 +64,6 @@ usersdb.create = ({
       return err;
     });
 };
-
-// usersdb.update = (car, id) => {
-//   console.log("id", car, id);
-//   return new Promise((resolve, reject) => {
-//     pool.query("UPDATE users SET car=? WHERE id=?", [car, id], (err, res) => {
-//       if (err) {
-//         return reject(err);
-//       }
-//       return resolve(res);
-//     });
-//   });
-// };
 
 usersdb.delete = (id) => {
   console.log("id", id);
