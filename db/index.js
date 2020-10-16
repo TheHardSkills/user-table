@@ -1,41 +1,30 @@
 const options = {
-  client: "mysql2",
+  client: 'mysql2',
   connection: {
-    host: "localhost",
-    user: "yulia",
-    password: "1",
-    database: "test",
+    host: 'localhost',
+    user: 'yulia',
+    password: '1',
+    database: 'test',
   },
 };
-const knex = require("knex")(options);
 
-let usersdb = {};
-usersdb.all = () => {
-  return knex
-    .from("usersdb")
-    .select("*")
-    .then((rows) => {
-      return rows;
-    })
-    .catch((err) => {
-      return err;
-    });
-};
+const knex = require('knex')(options);
 
-usersdb.one = (id) => {
-  return knex
-    .from("usersdb")
-    .select("*")
-    .where("id", "=", `${id}`)
-    .then((rows) => {
-      return rows;
-    })
-    .catch((err) => {
-      return err;
-    });
-};
+const usersDb = {};
+usersDb.all = () => knex
+  .from('usersdb')
+  .select('*')
+  .then((rows) => rows)
+  .catch((err) => err);
 
-usersdb.create = ({
+usersDb.one = (id) => knex
+  .from('usersdb')
+  .select('*')
+  .where('id', '=', `${id}`)
+  .then((rows) => rows)
+  .catch((err) => err);
+
+usersDb.create = ({
   id,
   first_name,
   last_name,
@@ -44,39 +33,26 @@ usersdb.create = ({
   ip_address,
   car,
   company,
-}) => {
-  return knex
-    .insert({
-      id,
-      first_name,
-      last_name,
-      email,
-      gender,
-      ip_address,
-      car,
-      company,
-    })
-    .into("usersdb")
-    .then((rows) => {
-      return rows;
-    })
-    .catch((err) => {
-      return err;
-    });
-};
+}) => knex
+  .insert({
+    id,
+    first_name,
+    last_name,
+    email,
+    gender,
+    ip_address,
+    car,
+    company,
+  })
+  .into('usersdb')
+  .then((rows) => rows)
+  .catch((err) => err);
 
-usersdb.delete = (id) => {
-  console.log("id", id);
-  return knex
-    .from("usersdb")
-    .delete()
-    .where("id", "=", `${id}`)
-    .then((rows) => {
-      return rows;
-    })
-    .catch((err) => {
-      return err;
-    });
-};
+usersDb.delete = (id) => knex
+  .from('usersdb')
+  .delete()
+  .where('id', '=', `${id}`)
+  .then((rows) => rows)
+  .catch((err) => err);
 
-module.exports = usersdb;
+module.exports = usersDb;

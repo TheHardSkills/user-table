@@ -1,49 +1,40 @@
-const express = require("express");
-const db = require("../db");
+const express = require('express');
+const db = require('../db');
 
 const userRouter = express.Router();
 
-userRouter.get("/", async (req, res) => {
+userRouter.get('/', async (req, res) => {
   try {
-    let results = await db.all();
+    const results = await db.all();
     res.json(results);
   } catch (e) {
-    console.log(e);
     res.sendStatus(500);
   }
 });
 
-userRouter.get("/:id", async (req, res) => {
+userRouter.get('/:id', async (req, res) => {
   try {
-    let results = await db.one(req.params.id);
+    const results = await db.one(req.params.id);
     res.json(results);
   } catch (e) {
-    console.log(e);
     res.sendStatus(500);
   }
 });
 
-userRouter.post("/create", async (req, res) => {
-  console.log("req.body", req.body);
-  console.log("req.body.first_name", req.body.first_name);
-
+userRouter.post('/create', async (req, res) => { // delete 'create'
   try {
     db.create(req.body);
-    res.send("Create");
+    res.send('Create');
   } catch (e) {
-    console.log(e);
     res.sendStatus(500);
   }
 });
 
-userRouter.get("/delete/:id", async (req, res) => {
-  console.log("req.params.id", req.params.id);
-
+userRouter.get('/delete/:id', async (req, res) => {
   try {
     db.delete(req.params.id);
-    res.send("Delete");
+    res.send('Delete');
   } catch (e) {
-    console.log(e);
     res.sendStatus(500);
   }
 });
