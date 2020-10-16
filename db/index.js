@@ -12,44 +12,40 @@ const knex = require('knex')(options);
 
 const usersDb = {};
 usersDb.all = () => knex
-  .from('usersdb')
+  .from('Users')
   .select('*')
   .then((rows) => rows)
   .catch((err) => err);
 
 usersDb.one = (id) => knex
-  .from('usersdb')
+  .from('Users')
   .select('*')
   .where('id', '=', `${id}`)
   .then((rows) => rows)
   .catch((err) => err);
 
 usersDb.create = ({
-  id,
-  first_name,
-  last_name,
+  firstName,
+  lastName,
   email,
   gender,
-  ip_address,
   car,
   company,
 }) => knex
   .insert({
-    id,
-    first_name,
-    last_name,
+    firstName,
+    lastName,
     email,
     gender,
-    ip_address,
     car,
     company,
   })
-  .into('usersdb')
+  .into('Users')
   .then((rows) => rows)
   .catch((err) => err);
 
 usersDb.delete = (id) => knex
-  .from('usersdb')
+  .from('Users')
   .delete()
   .where('id', '=', `${id}`)
   .then((rows) => rows)
